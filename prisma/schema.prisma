@@ -57,3 +57,19 @@ enum TransactionPaymentMethod {
   PIX
   OTHER
 }
+
+model Employee {
+  id String @id @default(uuid())
+  name String
+  salary Decimal @db.Decimal(10,2)
+  position EmployeePosition
+  dateStart DateTime
+  dateEnd DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum EmployeePosition {
+  SEAMIST
+  ASSISTANT
+}
