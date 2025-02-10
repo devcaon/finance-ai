@@ -5,48 +5,27 @@ import {
   WalletIcon,
 } from "lucide-react";
 import SummaryCard from "./summary-card";
-import { db } from "@/app/_lib/prisma";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 interface SummaryCardsProps {
-  month: string;
-  year: string;
+  balance: number;
+  investmentsTotal: number;
+  depositsTotal: number;
+  expensesTotal: number;
 }
 
-const SummaryCards = async ({ month, year }: SummaryCardsProps) => {
-  const where = {
-    date: {
-      gte: new Date(`${year}-${month}-01`),
-      lt: new Date(`${year}-${month}-31`),
-    },
-  };
-  const depositsTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "DEPOSIT" },
-        _sum: { amount: true },
-      })
-    )?._sum?.amount,
-  );
-  const investmentsTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "INVESTMENT" },
-        _sum: { amount: true },
-      })
-    )?._sum?.amount,
-  );
-  const expensesTotal = Number(
-    (
-      await db.transaction.aggregate({
-        where: { ...where, type: "EXPENSE" },
-        _sum: { amount: true },
-      })
-    )?._sum?.amount,
-  );
-  const balance = depositsTotal - investmentsTotal - expensesTotal;
+const SummaryCards = async ({
+  balance,
+  investmentsTotal,
+  depositsTotal,
+  expensesTotal,
+}: SummaryCardsProps) => {
+  const { userId } = auth();
+  if (!userId) redirect("/login");
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* first card */}
       <SummaryCard
         icon={<WalletIcon size={16} />}
