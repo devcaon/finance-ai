@@ -6,7 +6,7 @@ import {
 
 export const TRANSACTION_CATEGORY_LABELS = {
   HOUSING: "Aluguel",
-  TRANSPORTATION: "transporte",
+  TRANSPORTATION: "Transporte",
   FOOD: "Alimentação",
   ENTERTAINMENT: "Lazer",
   HEALTH: "Saúde",
@@ -95,6 +95,10 @@ export const TRANSACTION_CATEGORY_OPTIONS = [
   {
     value: TransactionCategory.HOUSING,
     label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.HOUSING],
+  },
+  {
+    value: TransactionCategory.TRANSPORTATION,
+    label: TRANSACTION_CATEGORY_LABELS[TransactionCategory.TRANSPORTATION],
   },
   {
     value: TransactionCategory.EDUCATION,

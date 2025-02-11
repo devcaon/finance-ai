@@ -52,7 +52,7 @@ const TransactionsPieChart = ({
     { type: TransactionType.EXPENSE, amount: expensesTotal, fill: "#E93030" },
   ];
   return (
-    <Card className="flex flex-col p-8">
+    <Card className="flex flex-col p-6">
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
