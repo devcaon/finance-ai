@@ -1,7 +1,6 @@
 import { db } from "@/app/_lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { TransactionType } from "@prisma/client";
-import { redirect } from "next/navigation";
 import { TotalExpensePerCategory, TransactionPercentagePerType } from "./types";
 
 interface GetDashboardProps {
@@ -11,7 +10,7 @@ interface GetDashboardProps {
 
 export const getDashboard = async ({ month, year }: GetDashboardProps) => {
   const { userId } = auth();
-  if (!userId) redirect("/login");
+  if (!userId) throw new Error("Unauthorized");
 
   const where = {
     date: {
@@ -88,7 +87,7 @@ export const getDashboard = async ({ month, year }: GetDashboardProps) => {
   const lastTransactions = await db.transaction.findMany({
     where,
     orderBy: { date: "desc" },
-    take: 10,
+    take: 15,
   });
 
   return {
