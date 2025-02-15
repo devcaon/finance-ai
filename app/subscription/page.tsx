@@ -5,23 +5,14 @@ import { Card, CardContent, CardHeader } from "../_components/ui/card";
 import { CheckIcon, XIcon } from "lucide-react";
 import AcquirePlanButton from "./_components/acquire-plan-button";
 import { Badge } from "../_components/ui/badge";
-import { db } from "../_lib/prisma";
-import { endOfMonth, startOfMonth } from "date-fns";
+import { getCurrentMonthTransactions } from "../_data/get-current-month-transactions";
 
 const Subscription = async () => {
   // verificar se tem usuário logado
   const { userId } = auth();
   if (!userId) redirect("/login");
   const user = await clerkClient().users.getUser(userId);
-  const currentMonthTransactions = await db.transaction.count({
-    where: {
-      userId,
-      createdAt: {
-        gte: startOfMonth(new Date()),
-        lt: endOfMonth(new Date()),
-      },
-    },
-  });
+  const currentMonthTransactions = await getCurrentMonthTransactions();
   const hasPremiumPlan = user.publicMetadata.subscriptionPlan === "premium";
 
   return (
@@ -32,9 +23,7 @@ const Subscription = async () => {
         <div className="flex gap-6">
           <Card className="w-[450px]">
             <CardHeader className="border-b border-solid py-8">
-              <h2 className="text-center text-2xl font-semibold">
-                Plano Básico
-              </h2>
+              <h2 className="text-center text-2xl font-semibold">Plano Free</h2>
               <div className="flex items-center justify-center gap-3">
                 <span className="text-4xl">R$</span>
                 <span className="text-6xl font-semibold">0</span>
@@ -67,12 +56,12 @@ const Subscription = async () => {
                   Ativo
                 </Badge>
               )}
-              <h2 className="text-center text-3xl font-semibold text-yellow-500">
+              <h2 className="text-center text-3xl font-semibold italic text-yellow-500">
                 Plano Premium
               </h2>
               <div className="flex items-center justify-center gap-3">
-                <span className="text-3xl">R$</span>
-                <span className="text-4xl font-semibold">19,99</span>
+                <span className="text-4xl">R$</span>
+                <span className="text-6xl font-semibold">9,90</span>
                 <span className="text-2xl text-muted-foreground">/mês</span>
               </div>
             </CardHeader>
