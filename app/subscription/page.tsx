@@ -21,33 +21,40 @@ const Subscription = async () => {
       <div className="space-y-6 p-6">
         <h1 className="text-2xl font-bold">Assinatura</h1>
         <div className="flex gap-6">
-          <Card className="w-[450px]">
-            <CardHeader className="border-b border-solid py-8">
-              <h2 className="text-center text-2xl font-semibold">Plano Free</h2>
-              <div className="flex items-center justify-center gap-3">
-                <span className="text-4xl">R$</span>
-                <span className="text-6xl font-semibold">0</span>
-                <span className="text-2xl text-muted-foreground">/mês</span>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-6 py-8">
-              <div className="flex items-center gap-2">
-                <CheckIcon className="text-primary" />
-                <p>
-                  Apenas 10 transações por mẽs (
-                  {!hasPremiumPlan ? currentMonthTransactions : 0}/10)
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <XIcon className="text-danger" />
-                <p>Relatórios de IA ilimitados</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <XIcon className="text-danger" />
-                <p>. . .</p>
-              </div>
-            </CardContent>
-          </Card>
+          {!hasPremiumPlan && (
+            <Card className="w-[450px]">
+              <CardHeader className="relative border-b border-solid py-8">
+                <Badge className="absolute left-6 top-6 bg-white/10 text-white hover:bg-white/10">
+                  Ativo
+                </Badge>
+                <h2 className="text-center text-2xl font-semibold">
+                  Plano Free
+                </h2>
+                <div className="flex items-center justify-center gap-3">
+                  <span className="text-4xl">R$</span>
+                  <span className="text-6xl font-semibold">0</span>
+                  <span className="text-2xl text-muted-foreground">/mês</span>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-6 py-8">
+                <div className="flex items-center gap-2">
+                  <CheckIcon className="text-primary" />
+                  <p>
+                    Apenas 10 transações por mẽs (
+                    {!hasPremiumPlan ? currentMonthTransactions : 0}/10)
+                  </p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <XIcon className="text-danger" />
+                  <p>Relatórios de IA ilimitados</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <XIcon className="text-danger" />
+                  <p>. . .</p>
+                </div>
+              </CardContent>
+            </Card>
+          )}
 
           <Card className="w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">

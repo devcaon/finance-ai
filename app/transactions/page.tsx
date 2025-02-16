@@ -18,6 +18,8 @@ const Transactions = async () => {
     where: {
       userId,
     },
+    orderBy: { date: "desc" },
+    take: 10,
   });
 
   const userCanAddTransaction = await canUserAddTransaction();
@@ -25,16 +27,16 @@ const Transactions = async () => {
   return (
     <>
       <Navbar />
-      <div className="space-y-6 overflow-hidden p-6">
+      <div className="space-y-6 p-6">
         <div className="items-center-w-full flex justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>
           <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
         </div>
-        <ScrollArea>
+        <ScrollArea className="h-full">
           <DataTable
             columns={transactionColumns}
-            // data={JSON.parse(JSON.stringify(transactions))}
-            data={transactions}
+            data={JSON.parse(JSON.stringify(transactions))}
+            //data={transactions}
           />
         </ScrollArea>
       </div>

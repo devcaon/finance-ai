@@ -9,16 +9,18 @@ const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex items-center justify-between border-b border-solid px-8 py-4">
+    <div className="flex items-center justify-between border-b border-solid px-8 py-4">
       {/* left side */}
       <div className="flex items-center gap-10">
-        <Image src="/logo.svg" alt="Finance AI" width={173} height={39} />
+        <Link href="/">
+          <Image src="/logo.svg" alt="Finance AI" width={173} height={39} />
+        </Link>
         <Link
           href="/"
           className={
             pathname === "/"
               ? "font-bold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground: hover:text-primary"
           }
         >
           Dashboard
@@ -28,7 +30,7 @@ const Navbar = () => {
           className={
             pathname === "/transactions"
               ? "font-bold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground: hover:text-primary"
           }
         >
           Transações
@@ -38,7 +40,7 @@ const Navbar = () => {
           className={
             pathname === "/subscription"
               ? "font-bold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground: hover:text-primary"
           }
         >
           Assinatura
@@ -47,7 +49,7 @@ const Navbar = () => {
 
       {/* right side */}
       <UserButton showName />
-    </nav>
+    </div>
   );
 };
 
