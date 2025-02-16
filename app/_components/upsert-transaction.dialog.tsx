@@ -41,6 +41,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { upsertTransaction } from "../_actions/updert-transaction";
+import { ArrowDownUpIcon } from "lucide-react";
 
 interface UpsertTransactionDialogProps {
   isOpen: boolean;
@@ -119,8 +120,9 @@ const UpsertTransactionDialog = ({
       <DialogTrigger asChild></DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold">
+          <DialogTitle className="flex items-center gap-2 text-2xl font-bold">
             {isUpdate ? "Atualizar" : "Adicionar"} Transação
+            <ArrowDownUpIcon size={22} />
           </DialogTitle>
           <DialogDescription>Insira as informações abaixo</DialogDescription>
         </DialogHeader>
