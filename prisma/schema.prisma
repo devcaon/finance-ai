@@ -16,6 +16,8 @@ datasource db {
   // directUrl = env("DATABASE_URL_UNPOOLED")
 }
 
+//models prisma
+
 model Transaction {
   id            String                   @id @default(uuid())
   name          String
