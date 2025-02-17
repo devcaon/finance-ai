@@ -7,6 +7,7 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../_components/ui/scroll-area";
 import { canUserAddTransaction } from "../_data/can-user-add-transaction";
+import { Input } from "../_components/ui/input";
 
 const Transactions = async () => {
   // verificar se tem usuário logado
@@ -25,16 +26,20 @@ const Transactions = async () => {
   return (
     <>
       <Navbar />
-      <div className="space-y-6 overflow-hidden p-6">
-        <div className="items-center-w-full flex justify-between">
+      <div className="h-full space-y-6 overflow-hidden p-6">
+        <div className="flex w-full items-center justify-between">
           <h1 className="text-2xl font-bold">Transações</h1>
-          <AddTransactionButton userCanAddTransaction={userCanAddTransaction} />
+          <div className="flex items-center gap-4">
+            <Input placeholder="Pesquisar..." />
+            <AddTransactionButton
+              userCanAddTransaction={userCanAddTransaction}
+            />
+          </div>
         </div>
-        <ScrollArea>
+        <ScrollArea className="h-[93%]">
           <DataTable
             columns={transactionColumns}
             data={JSON.parse(JSON.stringify(transactions))}
-            //data={transactions}
           />
         </ScrollArea>
       </div>

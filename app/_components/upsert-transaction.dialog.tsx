@@ -7,7 +7,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "./ui/dialog";
 import {
   Form,
@@ -40,7 +39,7 @@ import {
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { upsertTransaction } from "../_actions/updert-transaction";
+import { upsertTransaction } from "../_actions/upsert-transaction";
 import { ArrowDownUpIcon } from "lucide-react";
 
 interface UpsertTransactionDialogProps {
@@ -117,7 +116,6 @@ const UpsertTransactionDialog = ({
         }
       }}
     >
-      <DialogTrigger asChild></DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-2xl font-bold">
