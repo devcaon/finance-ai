@@ -4,7 +4,10 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
-const mulish = Mulish({ subsets: ["latin-ext"] });
+const poppins = Mulish({
+  subsets: ["latin-ext"],
+  weight: ["200", "300", "400", "500", "700"],
+});
 
 export const metadata: Metadata = {
   title: "Finance AI SaaS",
@@ -18,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${mulish.className} dark antialiased`}>
+      <body className={`${poppins.className} dark antialiased`}>
         <ClerkProvider
           appearance={{
             baseTheme: dark,
